@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+    <style>
+        .img {
+        display: block;
+        visibility: hidden;
+        left: auto;
+        position: absolute;
+        top: 700px;
+        z-index: 1;
+        width: 350px;
+        height: 700px;
+    }
+
+    .face {
+        position: fixed; /* Sit on top of the page content */
+        visibility: hidden;
+        width: 100%; /* Full width (cover the whole page) */
+        height: 100%; /* Full height (cover the whole page) */
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+        z-index: 20; /* Specify a stack order in case you're using a different order for other elements */
+        }
+
+        Div {
+            text-align: center;
+            align-items: center;
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+        }
+        #dont {
+            height: 80px;
+            width: 120px;
+            background-color:darkgrey;
+            border-radius: 12px;
+        }
+        #butOff {
+            height: 80px;
+            width: 120px;
+            background-color: red;
+            border-radius: 12px;
+        }
+        #on {
+            background-color: rgb(123, 167, 206);
+        }
+        #off {
+            background-color: rgb(80, 80, 80);
+        }
+
+        #black {
+            background-color: black;
+        }
+
+        #fingerMove {
+            
+            z-index: 10;
+            animation-name: finger;
+            animation-duration: 2s;
+            
+        }
+            @keyframes finger {
+            0%   { top:700px; visibility: visible;}
+            50%  {  top:10%;}
+            100% { top:700px; visibility: hidden; }
+            
+        }
+
+        #jump {
+            
+            z-index: 20;
+            animation-name: jumper;
+            animation-duration: 1s;
+            
+            
+        }
+        @keyframes jumper {
+            0%   {  visibility: visible;}
+            10%{
+                opacity: 0;
+            }
+            25%{
+            opacity: 1;
+            }
+            50%{
+            opacity: 0;
+            }
+            75%{
+            opacity: 1;
+            }
+            100% { visibility: hidden; }
+            
+        }
+        h1 {
+            color:crimson;
+        }
+    </style>
+</head>
+
+<body id="on">
+<div>
+
+    <div>
+        <h1>Don't Press The Button!</h1>
+        <button id="dont" onclick="buttonFunct()" type="button">ON</button>
+    
+
+    
+        <img class ="img" id="fingerMove2" src="finger.png" >
+        <img class ="face" id="jump2" src="face.webp";>
+    </div>
+</div>
+
+</body>
+<script>
+    let count = 0;
+    let on = true;
+    let face = document.getElementById("jump2")
+    let img = document.getElementById("fingerMove2")
+    let but = document.getElementById("dont");
+    let bod = document.getElementById("on");
+    console.log(but);
+
+    function ju(){
+            bod.id ="black"
+            face.id = "jump"
+            but.innerText="TOLD YOU!";
+            count=0;
+            setTimeout(function c(){
+                but.innerText="ON";
+                but.id = "dont"
+                bod.id = "on"
+                on=true;
+                img.id = "fingerMove2"
+                face.id = "jump2"
+            },3000);
+        }
+        // ju();
+    
+    function buttonFunct(){
+        if(count==3){
+            ju();
+        }
+        
+        else if(on){
+        img.id = "fingerMove"
+        but.innerText="OFF";
+        but.id = "butOff"
+        bod.id = "off"
+        on = false;
+        count++
+        setTimeout(function a() {
+        but.innerText="ON";
+        but.id = "dont"
+        bod.id = "on"
+        on=true;
+        setTimeout(function b(){
+            img.id = "fingerMove2"
+        },1000)
+        }, 1000);
+        }
+        
+        
+
+    };
+</script>
+
+</html>
